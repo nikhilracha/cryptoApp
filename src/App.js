@@ -1,23 +1,56 @@
-import logo from './logo.svg';
-import './App.css';
+import { Grid, Box } from "@mui/material";
+import Etherium from "./components/Etherium";
+import Bitcoin from "./components/Bitcoin";
+import React, { useEffect } from "react";
+import axios from "axios";
+
 
 function App() {
+
+  const [btcdata, setBTCData] = React.useState(null);
+  const [ethdata, setETHData] = React.useState(null);
+
+  const getBTCPrices = () => {
+    axios.get("https://d11h2.sse.codesandbox.io/api/BTC").then((response) => {
+      console.log(response.data.data);
+      const res = response.data.data;
+      setBTCData(res);
+    });
+  };
+
+  const getETHPrices = () => {
+    axios.get("https://d11h2.sse.codesandbox.io/api/ETH").then((response) => {
+      console.log(response.data.data);
+      const res = response.data.data;
+      setETHData(res);
+    });
+  };
+
+  // useEffect(() => setInterval(()=>{
+  //   getBTCPrices();
+  //   getETHPrices();
+  // },5000), []);
+
+  useEffect(()=>{
+    getBTCPrices();
+    getETHPrices();
+  },[]);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {btcdata && ethdata?
+      <Box sx={{ flexGrow: 1, alignContent: "center" }}>
+      <Grid container spacing={2}>
+        <Grid item xs md={6}>
+          <Bitcoin data={btcdata} />
+        </Grid>
+        <Grid item xs md={6}>
+          <Etherium data={ethdata}/>
+        </Grid>
+      </Grid>
+    </Box>
+      :<p>loading</p>}
+      
     </div>
   );
 }
