@@ -11,7 +11,7 @@ function App() {
   const [ethdata, setETHData] = React.useState(null);
 
   const getBTCPrices = () => {
-    axios.get("https://d11h2.sse.codesandbox.io/api/BTC").then((response) => {
+    axios.get("https://3eqes.sse.codesandbox.io/api/BTC").then((response) => {
       console.log(response.data.data);
       const res = response.data.data;
       setBTCData(res);
@@ -19,7 +19,7 @@ function App() {
   };
 
   const getETHPrices = () => {
-    axios.get("https://d11h2.sse.codesandbox.io/api/ETH").then((response) => {
+    axios.get("https://3eqes.sse.codesandbox.io/api/ETH").then((response) => {
       console.log(response.data.data);
       const res = response.data.data;
       setETHData(res);
