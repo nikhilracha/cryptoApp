@@ -26,15 +26,16 @@ function App() {
     });
   };
 
-  // useEffect(() => setInterval(()=>{
-  //   getBTCPrices();
-  //   getETHPrices();
-  // },5000), []);
-
-  useEffect(()=>{
+//This lifecycle function will set a timer to run for every 5 sec and therefore the prices are updated every 5 sec. 
+  useEffect(() => setInterval(()=>{
     getBTCPrices();
     getETHPrices();
-  },[]);
+  },5000), []);
+
+  // useEffect(()=>{
+  //   getBTCPrices();
+  //   getETHPrices();
+  // },[]);
 
   return (
     <div className="App">
